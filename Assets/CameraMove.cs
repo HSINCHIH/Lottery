@@ -3,30 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class CameraMove : MonoBehaviour {
-	Vector3 m_CameraOrigPos = Vector3.zero;
 	List<List<Vector3>>m_CameraPathes = new List<List<Vector3>>();
 	int m_FrameIndex = 0;
 	bool m_StartPath = true;
 	int m_SelectIndex = 0;
 	// Use this for initialization
 	void Start () {
-		//m_CameraOrigPos = this.transform.position;
-		//List<Vector3> temp = new List<Vector3> ();
-		//for (int i = 0; i < 300; i++) {
-		//	temp.Add (Vector3.Lerp (m_CameraOrigPos, new Vector3 (-190, 0, 0), i / 399.0f));
-		//}
-		//for (int i = 0; i < 300; i++) {
-		//	temp.Add (Vector3.Lerp (new Vector3 (-190, 0, 0),m_CameraOrigPos, i / 399.0f));
-		//}
-		//m_CameraPathes.Add (temp);
-		//temp = new List<Vector3> ();
-		//for (int i = 0; i < 300; i++) {
-		//	temp.Add (Vector3.Lerp (m_CameraOrigPos, new Vector3 (190, 0, 0), i / 399.0f));
-		//}
-		//for (int i = 0; i < 300; i++) {
-		//	temp.Add (Vector3.Lerp (new Vector3 (190, 0, 0),m_CameraOrigPos, i / 399.0f));
-		//}
-		//m_CameraPathes.Add (temp);
 		GetCirclePath();
 	}
 

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MainControl : MonoBehaviour {
+public class CameraControl : MonoBehaviour {
 	List<GameObject> m_CameraList = new List<GameObject>();
 
 	// Use this for initialization

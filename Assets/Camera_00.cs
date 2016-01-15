@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 public class Camera_00 : MonoBehaviour {
-	int m_CurStep = 0;
 	string[] m_TargetNames = { "1000", "1100", "1500", "1660", "1664", "1704", "1861", "8000", "8200" };
 	List<Vector3> m_TargetPos = new List<Vector3>();
 
@@ -20,6 +19,5 @@ public class Camera_00 : MonoBehaviour {
 
 	void Active()
 	{
-		m_CurStep = 0;
 	}
 }

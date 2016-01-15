@@ -22,13 +22,13 @@ public class Camera_01 : MonoBehaviour {
 			m_TargetVector.Add (targetVector);
 			m_StartPos.Add (target + 10 * targetVector);
 		}
-		int step = 60;
+		int step = 45;
 		for (int i = 0; i < m_TargetPos.Count; i++) {
 			List<Vector3> temp = new List<Vector3> ();
 			List<Vector3> tempReverse = new List<Vector3> ();
 			List<Vector3> result = new List<Vector3> ();
 			for (int j = 0; j < step; j++) {
-				temp.Add (Vector3.Lerp (m_StartPos[i], m_TargetPos[i], j / 85.0f));
+				temp.Add (Vector3.Lerp (m_StartPos[i], m_TargetPos[i], j / 60.0f));
 			}
 			int index = temp.Count - 1;
 			for (int j = 0; j < 10; j++) {

@@ -14,6 +14,9 @@ public class CanvasControl : MonoBehaviour
 	string m_UseTime = "";
 	List<int> m_BallPicked = new List<int> ();
 	string m_SavePath = "";
+	int m_Frame = 0;
+	DateTime m_StartTime = DateTime.Now;
+	double m_FPS = 0.0f;
 	// Use this for initialization
 	void Start ()
 	{
@@ -21,6 +24,7 @@ public class CanvasControl : MonoBehaviour
 		if (File.Exists (m_SavePath)) {
 			File.Delete (m_SavePath);
 		}
+		m_StartTime = DateTime.Now;
 	}
 	
 	// Update is called once per frame
@@ -30,6 +34,14 @@ public class CanvasControl : MonoBehaviour
 			m_ShowSystemInfo = m_ShowSystemInfo ? false : true;
 			ShowSystemInfo (m_ShowSystemInfo);
 		}
+		TimeSpan timeSpan = (DateTime.Now - m_StartTime);
+		if (timeSpan.TotalMilliseconds > 1000) {
+			m_FPS =	(m_Frame * 1000) / timeSpan.TotalMilliseconds;
+			m_Frame = 0;
+			m_StartTime = DateTime.Now;
+			ShowSystemInfo (m_ShowSystemInfo);
+		}
+		m_Frame++;
 	}
 
 	void PickBall (int number)
@@ -85,10 +97,11 @@ public class CanvasControl : MonoBehaviour
 	{
 		StringBuilder sb = new StringBuilder ();
 		if (onOff) {			
+			sb.Append (string.Format ("FPS : {0:0.00}\r\n", m_FPS));
 			sb.Append (string.Format ("開 獎 狀 態 : {0}\r\n", m_GlobalCanPick ? "Start" : "Stop"));
 			sb.Append (string.Format ("開 獎 間 隔 : {0}\r\n", m_Interval));
 			if (m_UseTime != "") {
-				sb.Append (string.Format ("花 費 時 間 : {0}\r\n",m_UseTime));
+				sb.Append (string.Format ("花 費 時 間 : {0}\r\n", m_UseTime));
 			}
 		}
 		GameObject canvas = GameObject.Find ("Canvas_SystemInfo");
@@ -97,17 +110,21 @@ public class CanvasControl : MonoBehaviour
 
 	void ShowNotify (int number)
 	{
-		GameObject canvas = GameObject.Find ("Canvas_Notify");
-		canvas.GetComponent<Text> ().text = string.Format ("\r\n現 在 開 出 號 碼\r\n{0:00}", number);
+		GameObject canvas = GameObject.Find ("Canvas_NotifyTitle");
+		canvas.GetComponent<Text> ().text = string.Format ("\r\n現 在 開 出 號 碼");
+		canvas = GameObject.Find ("Canvas_NotifyNumber");
+		canvas.GetComponent<Text> ().text = string.Format ("\r\n{0:00}", number);
 	}
 
 	void CleanNotify ()
 	{
-		GameObject canvas = GameObject.Find ("Canvas_Notify");
+		GameObject canvas = GameObject.Find ("Canvas_NotifyTitle");
+		canvas.GetComponent<Text> ().text = "";
+		canvas = GameObject.Find ("Canvas_NotifyNumber");
 		canvas.GetComponent<Text> ().text = "";
 	}
 
-	void SetUsageTime(string msUseTime)
+	void SetUsageTime (string msUseTime)
 	{
 		m_UseTime = msUseTime;
 		ShowSystemInfo (m_ShowSystemInfo);

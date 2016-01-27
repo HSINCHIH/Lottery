@@ -13,4 +13,4 @@ simple lottery demo
 07 keypad i : show or hide system information  
 08 keypad s : stop or start pick ball  
 09 keypad + : increase pick ball interval  
-10 keypad + : decrease pick ball interva  
+10 keypad - : decrease pick ball interva  
